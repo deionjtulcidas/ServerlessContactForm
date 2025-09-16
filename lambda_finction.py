@@ -18,7 +18,6 @@ def lambda_handler(event, context):
             'statusCode': 500,
             'body': json.dumps({'error': str(e)})
         }
-
 def page_router(httpmethod, querystring, formbody):
     if httpmethod == 'GET':
         try:
