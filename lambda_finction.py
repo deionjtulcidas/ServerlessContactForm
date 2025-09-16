@@ -61,7 +61,6 @@ def page_router(httpmethod, querystring, formbody):
                 'statusCode': 500,
                 'body': json.dumps({'error': str(e)})
             }
-
 def insert_record(formbody):
     formbody = formbody.replace("=", "' : '")
     formbody = formbody.replace("&", "', '")
