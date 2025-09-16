@@ -13,3 +13,17 @@ Real-time notifications and monitoring
 Secure and reliable design with IAM and optional encryption
 
 Automated deployments with Terraform + GitHub Actions
+
+## Additional Features:
+
+Spam protection using reCAPTCHA
+
+Multi-channel notifications via Slack and SNS
+
+Analytics dashboard using DynamoDB Streams + QuickSight
+
+Monitoring with CloudWatch for latency, errors, and performance under high traffic (10k+ requests/sec)
+
+Security with IAM least-privilege roles and KMS encryption
+
+Automated deployments using Terraform and GitHub Actions for reproducible and production-ready operations
