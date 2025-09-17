@@ -1,29 +1,50 @@
-## Real-Time Serverless Contact Form
+## AWS Serverless Contact Form Project
+Overview
 
-This project is a serverless contact management system built to handle form submissions in real time. It leverages AWS Lambda, API Gateway, DynamoDB, SNS, and CloudWatch to capture submissions, send instant notifications, and monitor performance. Submissions are securely stored in DynamoDB, and email notifications are sent via SNS.
+This project is a serverless contact form application built on AWS. It allows users to submit their name, email, and message through a web form, storing submissions in DynamoDB and making the data available for analysis via QuickSight. The project leverages serverless architecture for scalability, security, and low maintenance.
 
-I implemented least-privilege IAM roles and optional KMS encryption to follow security best practices. CloudWatch dashboards track latency, execution duration, and errors, ensuring reliability and observability. The system is fully automated and reproducible using Terraform and GitHub Actions, making it production-ready while serving as a polished portfolio/demo project.
+## Features
 
-## Key Highlights:
+Responsive contact form built with HTML and CSS.
+Serverless backend using AWS Lambda and API Gateway.
+Form submissions are:
+Stored in DynamoDB.
+Published to Amazon SNS for alerts.
+Saved as JSON files in S3 for integration with QuickSight dashboards.
+CloudWatch metrics track form submission counts.
+Fully automated DynamoDB → S3 → QuickSight workflow for analytics.
+Clean, modern UI with subtle animations.
 
-End-to-end serverless architecture using AWS services
+## Architecture
 
-Real-time notifications and monitoring
+Frontend: Static HTML/CSS form.
+Backend: Lambda function triggered via API Gateway.
+Data Storage: DynamoDB table for structured form data.
+Analytics: S3 bucket receives JSON files from DynamoDB streams; QuickSight visualizes the data.
+Notifications: SNS topic sends alerts for each new submission.
+Monitoring: CloudWatch logs and metrics track usage and errors.
+Technologies Used
+AWS Lambda
+Amazon API Gateway
+Amazon DynamoDB
+Amazon S3
+Amazon SNS
+Amazon CloudWatch
+Amazon QuickSight
+HTML/CSS/JavaScript
 
-Secure and reliable design with IAM and optional encryption
+## How It Works
 
-Automated deployments with Terraform + GitHub Actions
+User opens the contact form webpage.
+Submission triggers a POST request to API Gateway → Lambda.
+Lambda stores the data in DynamoDB, publishes to SNS, and saves a JSON file in S3.
+DynamoDB Streams ensure data flows to S3 for QuickSight dashboards.
+CloudWatch metrics track submission count in real time.
+Deployment
+Lambda deployed with IAM permissions to access DynamoDB, SNS, and S3.
+API Gateway configured as HTTP endpoint for the frontend form.
+S3 bucket configured as data lake for QuickSight analytics.
 
-## Additional Features:
+## Author
 
-Spam protection using reCAPTCHA
-
-Multi-channel notifications via Slack and SNS
-
-Analytics dashboard using DynamoDB Streams + QuickSight
-
-Monitoring with CloudWatch for latency, errors, and performance under high traffic (10k+ requests/sec)
-
-Security with IAM least-privilege roles and KMS encryption
-
-Automated deployments using Terraform and GitHub Actions for reproducible and production-ready operations
+## Deion Jose Tulcidas 
