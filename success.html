@@ -6,103 +6,107 @@
   <title>Thank You</title>
   <style>
     /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       overflow: hidden;
+      animation: fadeIn 1s ease forwards;
     }
 
-    h2 {
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      background: rgba(255,255,255,0.95);
+      padding: 50px 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+      max-width: 500px;
       text-align: center;
-      color: #222;
-      padding: 25px 40px;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-      opacity: 0;
-      transform: translateY(40px) scale(0.95);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-      max-width: 600px;
-      line-height: 1.6;
-      font-size: 1.3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .checkmark {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: inline-block;
+      border: 4px solid #007aff;
+      position: relative;
+      margin-bottom: 20px;
+      animation: pop 0.6s ease forwards;
+    }
+
+    .checkmark::after {
+      content: '';
+      position: absolute;
+      left: 22px;
+      top: 38px;
+      width: 20px;
+      height: 10px;
+      border-left: 4px solid #007aff;
+      border-bottom: 4px solid #007aff;
+      transform: rotate(-45deg) scale(0);
+      animation: draw 0.5s 0.6s forwards ease-out;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      70% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes draw {
+      to { transform: rotate(-45deg) scale(1); }
+    }
+
+    h1 {
+      font-size: 1.6rem;
       font-weight: 600;
-      letter-spacing: 0.5px;
+      color: #222;
+      margin-bottom: 15px;
     }
 
-    .visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
+    p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.5;
     }
 
-    /* Floating subtle background shapes for uniqueness */
+    /* Floating subtle shapes */
     .circle {
       position: absolute;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
-      animation: float 8s ease-in-out infinite;
+      background: rgba(0, 122, 255, 0.08);
+      animation: float 10s ease-in-out infinite;
     }
-
-    .circle.small {
-      width: 80px;
-      height: 80px;
-      top: 20%;
-      left: 15%;
-    }
-
-    .circle.medium {
-      width: 150px;
-      height: 150px;
-      bottom: 15%;
-      right: 10%;
-      animation-duration: 10s;
-    }
-
-    .circle.large {
-      width: 250px;
-      height: 250px;
-      top: 10%;
-      right: 25%;
-      animation-duration: 12s;
-    }
+    .circle.one { width: 150px; height: 150px; top: 5%; left: 5%; }
+    .circle.two { width: 100px; height: 100px; bottom: 10%; right: 10%; animation-duration: 12s; }
 
     @keyframes float {
-      0%, 100% {
-        transform: translateY(0) scale(1);
-      }
-      50% {
-        transform: translateY(-20px) scale(1.05);
-      }
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.05); }
     }
   </style>
 </head>
 <body>
-
-  <h2 id="thankYouMessage"> 
-    Thank you for exploring my AWS Project!  
-    Your submission was received and is now stored in DynamoDB. 🚀
-  </h2>
-
-  <!-- Floating shapes -->
-  <div class="circle small"></div>
-  <div class="circle medium"></div>
-  <div class="circle large"></div>
-
-  <script>
-    const thankYouMessage = document.getElementById('thankYouMessage');
-    setTimeout(() => {
-      thankYouMessage.classList.add('visible');
-    }, 600);
-  </script>
-
+  <div class="circle one"></div>
+  <div class="circle two"></div>
+  
+  <div class="container">
+    <div class="checkmark"></div>
+    <h1>Thank You!</h1>
+    <p>Your submission was successfully received. <br>
+       It is now stored securely in DynamoDB.</p>
+  </div>
 </body>
 </html>
