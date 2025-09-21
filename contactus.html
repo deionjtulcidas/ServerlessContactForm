@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Form</title>
   <style>
-    /* Reset */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -17,12 +16,10 @@
       overflow: hidden;
       animation: fadeIn 1s ease forwards;
     }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     .container {
       background: rgba(255,255,255,0.95);
       padding: 50px;
@@ -36,7 +33,6 @@
       transform: translateY(-5px);
       box-shadow: 0 25px 60px rgba(0,0,0,0.15);
     }
-
     h1 {
       font-size: 2rem;
       font-weight: 600;
@@ -44,14 +40,12 @@
       text-align: center;
       margin-bottom: 30px;
     }
-
     label {
       display: block;
       margin: 15px 0 5px;
       font-weight: 500;
       color: #555;
     }
-
     input, textarea {
       width: 100%;
       padding: 14px 16px;
@@ -61,17 +55,14 @@
       font-size: 1rem;
       transition: border-color 0.3s, box-shadow 0.3s;
     }
-
     input:focus, textarea:focus {
       border-color: #007aff;
       box-shadow: 0 0 12px rgba(0,122,255,0.2);
     }
-
     textarea {
       resize: none;
     }
-
-    input[type="submit"] {
+    button {
       background: linear-gradient(135deg, #007aff 0%, #00c6ff 100%);
       color: #fff;
       font-weight: 600;
@@ -81,15 +72,13 @@
       padding: 14px 20px;
       font-size: 1rem;
       margin-top: 20px;
+      width: 100%;
       transition: transform 0.2s, box-shadow 0.2s;
     }
-
-    input[type="submit"]:hover {
+    button:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(0, 122, 255, 0.4);
     }
-
-    /* Floating subtle shapes */
     .circle {
       position: absolute;
       border-radius: 50%;
@@ -98,7 +87,6 @@
     }
     .circle.one { width: 150px; height: 150px; top: 10%; left: 5%; }
     .circle.two { width: 100px; height: 100px; bottom: 20%; right: 10%; animation-duration: 12s; }
-
     @keyframes float {
       0%, 100% { transform: translateY(0) scale(1); }
       50% { transform: translateY(-20px) scale(1.05); }
@@ -110,7 +98,7 @@
   <div class="circle two"></div>
   <div class="container">
     <h1>Contact Us</h1>
-    <form action="https://edhup8wk7l.execute-api.us-east-1.amazonaws.com/dev" method="post">
+    <form id="contactForm">
       <label for="fname">First Name</label>
       <input type="text" id="fname" name="fname" required>
       <label for="lname">Last Name</label>
@@ -119,11 +107,38 @@
       <input type="email" id="email" name="email" required>
       <label for="message">Message</label>
       <textarea id="message" name="message" rows="5" required></textarea>
-      <input type="submit" value="Send Message">
+      <button type="submit">Send Message</button>
     </form>
   </div>
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const formData = {
+        fname: document.getElementById("fname").value,
+        lname: document.getElementById("lname").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+      };
+
+      try {
+        const response = await fetch("https://edhup8wk7l.execute-api.us-east-1.amazonaws.com/dev", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+          window.location.href = "success.html";
+        } else {
+          alert("Error submitting form. Please try again.");
+        }
+      } catch (error) {
+        console.error(error);
+        alert("Something went wrong. Please try again.");
+      }
+    });
+  </script>
 </body>
 </html>
-        """
-    }
-
