@@ -1,9 +1,9 @@
-AWS Serverless Contact Form
-Overview
+## AWS Serverless Contact Form
+## Overview
 
 This project is a fully serverless contact form application built on AWS. It allows users to submit their name, email, and message through a responsive web form, with all submissions processed and stored using AWS managed services. The architecture is designed for scalability, low operational overhead, and real-time monitoring.
 
-Features
+## Features
 
 Responsive frontend built with HTML, CSS, and JavaScript.
 
@@ -23,7 +23,7 @@ GitHub Actions CI/CD pipeline deploys static assets to S3.
 
 Modern UI with a clean design and subtle animations.
 
-Architecture
+## Architecture
 
 Frontend: Static HTML/CSS/JS contact form hosted in S3.
 
@@ -37,7 +37,7 @@ Monitoring: CloudWatch tracks logs, metrics, and errors.
 
 (Future enhancement) Integration with Athena + QuickSight for dashboarding.
 
-Technologies Used
+## Technologies Used
 
 AWS Lambda
 
@@ -55,7 +55,7 @@ GitHub Actions
 
 HTML/CSS/JavaScript
 
-How It Works
+## How It Works
 
 User fills out and submits the contact form.
 
@@ -72,3 +72,6 @@ Publishes an alert to SNS.
 Emits a custom CloudWatch metric.
 
 Submissions can be viewed in DynamoDB, S3, or monitored in CloudWatch.
+
+## Auther
+Deion Jose Tulcidas
