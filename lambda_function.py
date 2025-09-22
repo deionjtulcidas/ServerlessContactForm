@@ -14,8 +14,6 @@ S3_BUCKET = os.environ.get("S3_BUCKET")
 SNS_TOPIC_ARN = os.environ.get("SNS_TOPIC_ARN")          
 METRIC_NAMESPACE = os.environ.get("METRIC_NAMESPACE", "ContactForm")
 
-# ---------- helpers ----------
-
 CORS_HEADERS = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
@@ -53,7 +51,7 @@ def method(event):
         return event["requestContext"]["http"].get("method", "")
     return ""
 
-# ---------- main handler ----------
+# main
 
 def lambda_handler(event, context):
     # Log the raw incoming event for debugging
@@ -62,11 +60,11 @@ def lambda_handler(event, context):
     m = method(event)
     print("HTTP Method:", m)
 
-    # CORS preflight
+    # CORS
     if m == "OPTIONS":
         return resp(204, "")
 
-    # simple health check
+    # health check
     if m == "GET":
         return resp(200, {"message": "Contact Page API is live"})
 
@@ -85,12 +83,12 @@ def lambda_handler(event, context):
     if not data:
         return resp(400, {"error": "Invalid or missing JSON body"})
 
-    # simple validation
+    # validation
     for field in ("fname", "lname", "email", "message"):
         if not str(data.get(field, "")).strip():
             return resp(400, {"error": f"Missing field: {field}"})
 
-    # normalize + enrich
+    # normalize 
     submission_id = str(uuid.uuid4())
     now = datetime.now(timezone.utc)
     iso = now.isoformat()
