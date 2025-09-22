@@ -1,42 +1,44 @@
-## AWS Serverless Contact Form Project
+AWS Serverless Contact Form
 Overview
 
-This project is a serverless contact form application built on AWS. It allows users to submit their name, email, and message through a web form, storing submissions in DynamoDB and making the data available for analysis via QuickSight. The project leverages serverless architecture for scalability, security, and low maintenance.
+This project is a fully serverless contact form application built on AWS. It allows users to submit their name, email, and message through a responsive web form, with all submissions processed and stored using AWS managed services. The architecture is designed for scalability, low operational overhead, and real-time monitoring.
 
-## Features
+Features
 
-Responsive contact form built with HTML and CSS.
+Responsive frontend built with HTML, CSS, and JavaScript.
 
-Serverless backend using AWS Lambda and API Gateway.
+Serverless backend powered by API Gateway and AWS Lambda.
 
-Form submissions are:
+Form submissions are automatically:
 
-Stored in DynamoDB.
+Stored in DynamoDB for persistence.
 
-Published to Amazon SNS for alerts.
+Saved as JSON objects in S3 for long-term storage and analytics.
 
-Saved as JSON files in S3 for integration with QuickSight dashboards.
+Published to Amazon SNS for real-time alerts.
 
-CloudWatch metrics track form submission counts.
+Counted with CloudWatch custom metrics for monitoring.
 
-Fully automated DynamoDB → S3 → QuickSight workflow for analytics.
+GitHub Actions CI/CD pipeline deploys static assets to S3.
 
-Clean, modern UI with subtle animations.
+Modern UI with a clean design and subtle animations.
 
-## Architecture
-Frontend: Static HTML/CSS form.
+Architecture
 
-Backend: Lambda function triggered via API Gateway.
+Frontend: Static HTML/CSS/JS contact form hosted in S3.
 
-Data Storage: DynamoDB table for structured form data.
+Backend: Lambda function triggered by API Gateway endpoint.
 
-Analytics: S3 bucket receives JSON files from DynamoDB streams; QuickSight visualizes the data.
+Storage: DynamoDB (structured data) + S3 (analytics data).
 
-Notifications: SNS topic sends alerts for each new submission.
+Notifications: SNS topic sends alerts on each submission.
 
-Monitoring: CloudWatch logs and metrics track usage and errors.
+Monitoring: CloudWatch tracks logs, metrics, and errors.
 
-## Technologies Used
+(Future enhancement) Integration with Athena + QuickSight for dashboarding.
+
+Technologies Used
+
 AWS Lambda
 
 Amazon API Gateway
@@ -49,28 +51,24 @@ Amazon SNS
 
 Amazon CloudWatch
 
-Amazon QuickSight
+GitHub Actions
 
 HTML/CSS/JavaScript
 
-## How It Works
+How It Works
 
-User opens the contact form webpage.
+User fills out and submits the contact form.
 
-Submission triggers a POST request to API Gateway → Lambda.
+A POST request is sent to API Gateway, which invokes a Lambda function.
 
-Lambda stores the data in DynamoDB, publishes to SNS, and saves a JSON file in S3.
+Lambda:
 
-DynamoDB Streams ensure data flows to S3 for QuickSight dashboards.
+Stores the submission in DynamoDB.
 
-CloudWatch metrics track submission count in real time Deployment
+Writes a JSON copy to S3.
 
-Lambda deployed with IAM permissions to access DynamoDB, SNS, and S3.
+Publishes an alert to SNS.
 
-API Gateway configured as HTTP endpoint for the frontend form.
+Emits a custom CloudWatch metric.
 
-S3 bucket configured as data lake for QuickSight analytics.
-
-## Author
-
-Deion Jose Tulcidas 
+Submissions can be viewed in DynamoDB, S3, or monitored in CloudWatch.
